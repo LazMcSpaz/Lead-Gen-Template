@@ -1,0 +1,66 @@
+{
+  "market": {
+    "city": "Eugene",
+    "citySlug": "eugene",
+    "state": "Oregon",
+    "stateAbbr": "OR",
+    "county": "Lane County",
+    "areaCode": "541",
+    "surroundingAreas": ["Springfield", "Cottage Grove", "Junction City", "Veneta"]
+  },
+
+  "trade": {
+    "name": "electrician",
+    "nameDisplay": "Electrician",
+    "namePlural": "electricians",
+    "services": [
+      "Panel Upgrade",
+      "EV Charger Installation",
+      "Electrical Repair",
+      "Whole-Home Rewiring",
+      "Generator Hookup"
+    ],
+    "primaryKeyword": "electrician Eugene OR",
+    "emergencyUrgency": true
+  },
+
+  "brand": {
+    "consumerName": "Eugene Home Connect",
+    "consumerDomain": "eugenehomeconnect.com",
+    "entityName": "Emerald Lead Co. LLC",
+    "phone": "541-000-0000",
+    "email": "contact@eugenehomeconnect.com",
+    "address": "Eugene, OR"
+  },
+
+  "seo": {
+    "titleSuffix": "Eugene, OR",
+    "metaDescription": "Free local {{trade.name}} matching service for Eugene homeowners. Tell us what you need — we'll connect you with a vetted local pro within the hour.",
+    "gmbCategory": "Marketing Agency"
+  },
+
+  "integrations": {
+    "ga4MeasurementId": "G-XXXXXXXXXX",
+    "gscVerificationTag": "your-verification-content",
+    "emailjsServiceId": "service_xxxxxxx",
+    "emailjsPublicKey": "your_public_key",
+    "emailjsBuyerTemplateId": "template_buyer",
+    "emailjsConfirmTemplateId": "template_confirm",
+    "netlifyFormName": "eugene-electrician-leads"
+  },
+
+  "api": {
+    "attomApiKey": "ATTOM_KEY_HERE",
+    "melissaApiKey": "MELISSA_KEY_HERE",
+    "claudeModel": "claude-sonnet-4-20250514"
+  },
+
+  "pricing": {
+    "sharedCool": 22,
+    "sharedWarm": 35,
+    "sharedHot": 52,
+    "exclusiveCool": 45,
+    "exclusiveWarm": 72,
+    "exclusiveHot": 105
+  }
+}
