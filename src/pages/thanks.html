@@ -14,9 +14,9 @@
 <section class="section">
   <div class="container container--narrow text-center">
     <header class="section-header" style="margin-inline:auto;">
-      <span class="eyebrow">Request received</span>
-      <h1>Thanks — we're matching you now.</h1>
-      <p class="lead mx-auto" style="margin-inline:auto;">A vetted {{market.city}} {{trade.name}} will reach out by phone or text within an hour during business hours. If your request was urgent, you've been routed first.</p>
+      <span class="eyebrow" data-thanks-eyebrow>Request received</span>
+      <h1 data-thanks-headline>Thanks — we're matching you now.</h1>
+      <p class="lead mx-auto" style="margin-inline:auto;" data-thanks-lead>A vetted {{market.city}} {{trade.name}} will reach out by phone or text within an hour during business hours. If your request was urgent, you've been routed first.</p>
     </header>
 
     <div class="trust-strip" style="margin-bottom: var(--space-7);">
@@ -37,6 +37,39 @@
 </main>
 
 <!-- @include footer.html -->
+
+<script>
+(function () {
+  var params = new URLSearchParams(location.search);
+  var temp = params.get('temp');
+  if (!temp) return;
+  var copy = {
+    Hot: {
+      eyebrow: 'Priority request received',
+      headline: "You're being routed first.",
+      lead: "We flagged your request as time-sensitive. A vetted {{market.city}} {{trade.name}} is being matched right now and should reach out within the hour."
+    },
+    Warm: {
+      eyebrow: 'Request received',
+      headline: "Thanks — we're matching you now.",
+      lead: "A vetted {{market.city}} {{trade.name}} will reach out by phone or text within an hour during business hours."
+    },
+    Cool: {
+      eyebrow: 'Request received',
+      headline: "Thanks — we'll match you when you're ready.",
+      lead: "Since you said you're early in the process, we'll send your request to a {{market.city}} {{trade.name}} who's comfortable doing free quotes — no pressure."
+    }
+  };
+  var c = copy[temp];
+  if (!c) return;
+  var eyebrow = document.querySelector('[data-thanks-eyebrow]');
+  var headline = document.querySelector('[data-thanks-headline]');
+  var lead = document.querySelector('[data-thanks-lead]');
+  if (eyebrow) eyebrow.textContent = c.eyebrow;
+  if (headline) headline.textContent = c.headline;
+  if (lead) lead.textContent = c.lead;
+})();
+</script>
 
 </body>
 </html>
