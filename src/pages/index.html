@@ -139,6 +139,8 @@
     <form class="lead-form" id="lead-form" name="{{integrations.netlifyFormName}}" method="POST" action="thanks.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
       <input type="hidden" name="form-name" value="{{integrations.netlifyFormName}}">
       <input type="hidden" name="lead-temperature" value="">
+      <input type="hidden" name="lead-score" value="">
+      <input type="hidden" name="lead-label" value="">
       <input type="hidden" name="source-page" value="homepage">
       <p class="form-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
 
@@ -474,7 +476,6 @@
 </main>
 
 <!-- @include footer.html -->
-
-<script src="{{paths.root}}js/form-steps.js" defer></script>
+<!-- @include site-scripts.html -->
 </body>
 </html>

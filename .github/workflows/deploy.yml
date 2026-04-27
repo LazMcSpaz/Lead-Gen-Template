@@ -38,6 +38,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Test form-scoring matches README rules
+        run: npm test
+
       - name: Build with demo config
         run: node scripts/build.js --config config/market.demo.json
 
