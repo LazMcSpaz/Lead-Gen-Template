@@ -14,8 +14,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const CONFIG_PATH = path.join(ROOT, 'config', 'market.json');
-const EXAMPLE_PATH = path.join(ROOT, 'config', 'market.example.json');
+const DEFAULT_CONFIG_PATH = path.join(ROOT, 'config', 'market.json');
 const SRC_DIR = path.join(ROOT, 'src');
 const DIST_DIR = path.join(ROOT, 'dist');
 const SITEMAP_TEMPLATE = path.join(ROOT, 'sitemap-template.xml');
@@ -25,6 +24,14 @@ const TEXT_EXTENSIONS = new Set([
   '.html', '.htm', '.css', '.js', '.mjs', '.cjs',
   '.xml', '.json', '.txt', '.md', '.svg', '.webmanifest',
 ]);
+
+// src/ subdirectories that are not deployed (consumed at build time only).
+const SRC_EXCLUDE_TOP = new Set(['schema']);
+
+// Files under src/pages/ are routed at the dist root. Other src/ subdirs keep
+// their relative path. So src/pages/index.html → dist/index.html, but
+// src/css/style.css → dist/css/style.css.
+const SRC_FLATTEN_PREFIX = 'pages';
 
 // Values shipped in market.example.json that must be replaced before a build is valid.
 const SENTINEL_VALUES = new Set([
@@ -42,20 +49,41 @@ const SENTINEL_VALUES = new Set([
 const PLACEHOLDER_RE = /\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g;
 const MAX_EXPANSION_PASSES = 5;
 
-// ---------- load ----------
+// ---------- args & load ----------
 
-function loadConfig() {
-  if (!fs.existsSync(CONFIG_PATH)) {
+function parseArgs(argv) {
+  const args = { configPath: DEFAULT_CONFIG_PATH };
+  for (let i = 2; i < argv.length; i += 1) {
+    const a = argv[i];
+    if (a === '--config' || a === '-c') {
+      args.configPath = path.resolve(ROOT, argv[i + 1] || '');
+      i += 1;
+    } else if (a.startsWith('--config=')) {
+      args.configPath = path.resolve(ROOT, a.slice('--config='.length));
+    } else if (a === '--help' || a === '-h') {
+      console.log('Usage: node scripts/build.js [--config <path>]');
+      console.log('  Defaults to config/market.json. Pass --config config/market.demo.json for previews.');
+      process.exit(0);
+    } else {
+      fail([`Unknown argument: ${a}`, 'Run with --help for usage.']);
+    }
+  }
+  return args;
+}
+
+function loadConfig(configPath) {
+  const rel = path.relative(ROOT, configPath);
+  if (!fs.existsSync(configPath)) {
     fail([
-      'config/market.json not found.',
+      `${rel} not found.`,
       'Run: cp config/market.example.json config/market.json',
       'Then fill in the market-specific values before building.',
     ]);
   }
   try {
-    return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+    return JSON.parse(fs.readFileSync(configPath, 'utf8'));
   } catch (err) {
-    fail([`config/market.json is not valid JSON: ${err.message}`]);
+    fail([`${rel} is not valid JSON: ${err.message}`]);
   }
 }
 
@@ -150,6 +178,12 @@ function emptyDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
+function distPathFor(rel) {
+  const parts = rel.split(path.sep);
+  if (parts[0] === SRC_FLATTEN_PREFIX) return parts.slice(1).join(path.sep);
+  return rel;
+}
+
 function walkSrc(config) {
   if (!fs.existsSync(SRC_DIR)) {
     console.log('[build] /src does not exist yet — skipping template walk.');
@@ -161,12 +195,16 @@ function walkSrc(config) {
     const current = stack.pop();
     for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
       const abs = path.join(current, entry.name);
+      const rel = path.relative(SRC_DIR, abs);
+      const topDir = rel.split(path.sep)[0];
+      if (SRC_EXCLUDE_TOP.has(topDir)) continue;
       if (entry.isDirectory()) {
         stack.push(abs);
         continue;
       }
-      const rel = path.relative(SRC_DIR, abs);
-      const out = path.join(DIST_DIR, rel);
+      const outRel = distPathFor(rel);
+      if (!outRel) continue;
+      const out = path.join(DIST_DIR, outRel);
       fs.mkdirSync(path.dirname(out), { recursive: true });
       const ext = path.extname(entry.name).toLowerCase();
       if (TEXT_EXTENSIONS.has(ext)) {
@@ -248,13 +286,14 @@ function fail(lines) {
 // ---------- main ----------
 
 function main() {
-  const config = loadConfig();
+  const args = parseArgs(process.argv);
+  const config = loadConfig(args.configPath);
   validateConfig(config);
   emptyDir(DIST_DIR);
   const fileCount = walkSrc(config);
   generateSitemap(config);
   copyRobots();
-  console.log(`[build] wrote ${fileCount} template file(s) to dist/`);
+  console.log(`[build] wrote ${fileCount} template file(s) to dist/ (config: ${path.relative(ROOT, args.configPath)})`);
   printChecklist(config);
 }
 

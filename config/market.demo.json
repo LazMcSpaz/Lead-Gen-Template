@@ -1,0 +1,68 @@
+{
+  "_comment": "Preview-only config used by .github/workflows/deploy.yml to render the template against fake-but-realistic values. Real markets use config/market.json (gitignored). Never put live API keys here — this file is committed.",
+
+  "market": {
+    "city": "Eugene",
+    "citySlug": "eugene",
+    "state": "Oregon",
+    "stateAbbr": "OR",
+    "county": "Lane County",
+    "areaCode": "541",
+    "surroundingAreas": ["Springfield", "Cottage Grove", "Junction City", "Veneta"]
+  },
+
+  "trade": {
+    "name": "electrician",
+    "nameDisplay": "Electrician",
+    "namePlural": "electricians",
+    "services": [
+      "Panel Upgrade",
+      "EV Charger Installation",
+      "Electrical Repair",
+      "Whole-Home Rewiring",
+      "Generator Hookup"
+    ],
+    "primaryKeyword": "electrician Eugene OR",
+    "emergencyUrgency": true
+  },
+
+  "brand": {
+    "consumerName": "Eugene Home Connect",
+    "consumerDomain": "eugenehomeconnect.com",
+    "entityName": "Emerald Lead Co. LLC",
+    "phone": "541-555-0123",
+    "email": "demo@eugenehomeconnect.com",
+    "address": "Eugene, OR"
+  },
+
+  "seo": {
+    "titleSuffix": "Eugene, OR",
+    "metaDescription": "Free local {{trade.name}} matching service for {{market.city}} homeowners. Tell us what you need — we'll connect you with a vetted local pro within the hour.",
+    "gmbCategory": "Marketing Agency"
+  },
+
+  "integrations": {
+    "ga4MeasurementId": "G-DEMO00000A",
+    "gscVerificationTag": "preview-not-verified",
+    "emailjsServiceId": "service_demo_only",
+    "emailjsPublicKey": "pk_demo_preview",
+    "emailjsBuyerTemplateId": "tmpl_demo_buyer",
+    "emailjsConfirmTemplateId": "tmpl_demo_confirm",
+    "netlifyFormName": "eugene-electrician-leads"
+  },
+
+  "api": {
+    "attomApiKey": "demo_no_real_key",
+    "melissaApiKey": "demo_no_real_key",
+    "claudeModel": "claude-sonnet-4-20250514"
+  },
+
+  "pricing": {
+    "sharedCool": 22,
+    "sharedWarm": 35,
+    "sharedHot": 52,
+    "exclusiveCool": 45,
+    "exclusiveWarm": 72,
+    "exclusiveHot": 105
+  }
+}

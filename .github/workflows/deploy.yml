@@ -1,0 +1,61 @@
+# Preview deploy to GitHub Pages.
+#
+# This is for visual previews of the template only. The production target
+# for any real market is a separate GitHub repo + Netlify site, per README.
+# See README.md §"Scaling Philosophy".
+#
+# Source of truth for preview content is config/market.demo.json — never put
+# real API keys here. To enable: in repo Settings → Pages, set Source to
+# "GitHub Actions". The first push to one of the trigger branches will
+# build and publish dist/.
+
+name: Preview deploy (GitHub Pages)
+
+on:
+  push:
+    branches:
+      - main
+      - claude/plan-step-one-4FeJP
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build with demo config
+        run: node scripts/build.js --config config/market.demo.json
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
