@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{brand.consumerName}} — Local {{trade.namePlural}} in {{seo.titleSuffix}}</title>
+  <meta name="description" content="{{seo.metaDescription}}">
+  <meta name="google-site-verification" content="{{integrations.gscVerificationTag}}">
+  <meta property="og:title" content="{{brand.consumerName}} — Local {{trade.namePlural}} in {{seo.titleSuffix}}">
+  <meta property="og:description" content="{{seo.metaDescription}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://{{brand.consumerDomain}}/">
+  <link rel="canonical" href="https://{{brand.consumerDomain}}/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-header__brand" href="./">{{market.city}} <span>Home Connect</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Get matched</a>
+    </nav>
+    <a class="site-header__phone" href="tel:{{brand.phone}}">{{brand.phone}}</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div>
+      <span class="hero__eyebrow">Free for {{market.city}} homeowners</span>
+      <h1>Find a vetted {{trade.name}} in {{market.city}} — fast.</h1>
+      <p class="hero__subhead">Tell us what you need. We match you with a trusted local {{trade.name}} within the hour. No fees, no contracts, no spam — just a real pro who answers the phone.</p>
+      <div class="hero__cta-row">
+        <a href="#contact" class="btn btn--primary btn--large">Get matched now</a>
+        <a href="tel:{{brand.phone}}" class="btn btn--ghost btn--large">Call {{brand.phone}}</a>
+      </div>
+    </div>
+    <div class="trust-strip" aria-label="At a glance">
+      <div class="trust-strip__item"><strong>&lt; 1 hr</strong>Average match time</div>
+      <div class="trust-strip__item"><strong>$0</strong>Cost to homeowners</div>
+      <div class="trust-strip__item"><strong>{{market.areaCode}}</strong>Local-only pros</div>
+      <div class="trust-strip__item"><strong>3 max</strong>Quotes per request</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface" id="services">
+  <div class="container">
+    <header class="section-header">
+      <span class="eyebrow">What we cover</span>
+      <h2>Common {{trade.name}} jobs in {{market.city}}</h2>
+      <p class="lead">Whether it's an emergency, a planned upgrade, or a quote you've been putting off, we'll match you with a {{market.city}}-area {{trade.name}} who handles exactly this kind of work.</p>
+    </header>
+    <div class="grid grid--services">
+      <article class="card">
+        <span class="card__eyebrow">Service</span>
+        <h3 class="card__title">{{trade.services.0}}</h3>
+        <p class="card__body">Older {{market.city}} homes often need a panel upgrade before adding modern loads. We match you with pros who pull the permit and handle the utility coordination.</p>
+        <a class="card__link" href="#contact">Get a quote</a>
+      </article>
+      <article class="card">
+        <span class="card__eyebrow">Service</span>
+        <h3 class="card__title">{{trade.services.1}}</h3>
+        <p class="card__body">Level-2 EV charger installs, panel checks, and {{market.stateAbbr}} rebate paperwork — handled by a vetted local installer.</p>
+        <a class="card__link" href="#contact">Get a quote</a>
+      </article>
+      <article class="card">
+        <span class="card__eyebrow">Service</span>
+        <h3 class="card__title">{{trade.services.2}}</h3>
+        <p class="card__body">Flickering lights, dead outlets, breakers that won't reset. Same-day matches when it's urgent.</p>
+        <a class="card__link" href="#contact">Get a quote</a>
+      </article>
+      <article class="card">
+        <span class="card__eyebrow">Service</span>
+        <h3 class="card__title">{{trade.services.3}}</h3>
+        <p class="card__body">Knob-and-tube replacements and full rewires for older {{market.county}} properties. Inspection-ready work.</p>
+        <a class="card__link" href="#contact">Get a quote</a>
+      </article>
+      <article class="card">
+        <span class="card__eyebrow">Service</span>
+        <h3 class="card__title">{{trade.services.4}}</h3>
+        <p class="card__body">Standby and portable generator hookups with proper transfer switches. Critical for {{market.city}} winter outages.</p>
+        <a class="card__link" href="#contact">Get a quote</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how-it-works">
+  <div class="container">
+    <header class="section-header">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. Under a minute.</h2>
+    </header>
+    <div class="grid grid--three">
+      <article class="card">
+        <span class="card__eyebrow">Step 1</span>
+        <h3 class="card__title">Tell us what you need</h3>
+        <p class="card__body">Answer four short questions about the job, your timeline, and your address. That's it.</p>
+      </article>
+      <article class="card">
+        <span class="card__eyebrow">Step 2</span>
+        <h3 class="card__title">We match you to a local pro</h3>
+        <p class="card__body">A vetted {{market.city}} {{trade.name}} reviews your request and reaches out — usually within an hour.</p>
+      </article>
+      <article class="card">
+        <span class="card__eyebrow">Step 3</span>
+        <h3 class="card__title">You decide</h3>
+        <p class="card__body">No obligation. If the fit's right, you book. If not, we send a different pro. Your info is never sold.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface" id="contact">
+  <div class="container container--narrow">
+    <header class="section-header" style="text-align:center;margin-inline:auto;">
+      <span class="eyebrow">Get matched</span>
+      <h2>Tell us about the job</h2>
+      <p class="lead mx-auto" style="margin-inline:auto;">Free, no obligation. Most {{market.city}} homeowners hear back from a matched {{trade.name}} within an hour.</p>
+    </header>
+
+    <form class="lead-form" name="{{integrations.netlifyFormName}}" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="{{integrations.netlifyFormName}}">
+      <input type="hidden" name="lead-temperature" value="">
+      <input type="hidden" name="source-page" value="homepage">
+      <p class="form-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+      <div class="form-group">
+        <label class="form-label" for="name">Your name <span class="required" aria-hidden="true">*</span></label>
+        <input class="form-input" type="text" id="name" name="name" required autocomplete="name">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="phone">Phone <span class="required" aria-hidden="true">*</span></label>
+        <input class="form-input" type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="{{market.areaCode}}-555-0100">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="address">Property address <span class="required" aria-hidden="true">*</span></label>
+        <input class="form-input" type="text" id="address" name="address" required autocomplete="street-address" placeholder="123 Main St, {{market.city}}, {{market.stateAbbr}}">
+        <span class="form-hint">Used to match you with a {{trade.name}} who serves your area.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="service">Service needed</label>
+        <select class="form-select" id="service" name="service">
+          <option value="{{trade.services.0}}">{{trade.services.0}}</option>
+          <option value="{{trade.services.1}}">{{trade.services.1}}</option>
+          <option value="{{trade.services.2}}">{{trade.services.2}}</option>
+          <option value="{{trade.services.3}}">{{trade.services.3}}</option>
+          <option value="{{trade.services.4}}">{{trade.services.4}}</option>
+          <option value="Other">Other / not sure</option>
+        </select>
+      </div>
+
+      <fieldset class="form-group">
+        <legend class="form-label">What do you need help with?</legend>
+        <div class="radio-group radio-group--2col">
+          <label class="radio-card">
+            <input type="radio" name="urgency" value="emergency">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text">
+              <span class="radio-card__title">Emergency / urgent</span>
+              <span class="radio-card__desc">Something's broken right now</span>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="urgency" value="scheduled">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text">
+              <span class="radio-card__title">Scheduled service</span>
+              <span class="radio-card__desc">Planned work, not urgent</span>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="urgency" value="quote">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text">
+              <span class="radio-card__title">Just getting a quote</span>
+              <span class="radio-card__desc">Comparing options</span>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="urgency" value="info">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text">
+              <span class="radio-card__title">Just researching</span>
+              <span class="radio-card__desc">Not ready to book yet</span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend class="form-label">How soon do you need this?</legend>
+        <div class="radio-group radio-group--2col">
+          <label class="radio-card">
+            <input type="radio" name="timeline" value="48h">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text"><span class="radio-card__title">Within 24–48 hours</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="timeline" value="week">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text"><span class="radio-card__title">This week</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="timeline" value="month">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text"><span class="radio-card__title">Within a month</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="timeline" value="unsure">
+            <span class="radio-card__indicator" aria-hidden="true"></span>
+            <span class="radio-card__text"><span class="radio-card__title">Unsure / flexible</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <label class="form-label" for="notes">Anything else we should know?</label>
+        <textarea class="form-textarea" id="notes" name="notes" placeholder="Optional — describe the job, access notes, anything that helps a pro give you a real quote."></textarea>
+      </div>
+
+      <label class="form-consent">
+        <input type="checkbox" name="consent" required>
+        <span>I agree to be contacted by a {{market.city}}-area {{trade.name}} regarding this request. I understand my info is shared with at most three local pros and never sold. <a href="privacy.html">Privacy policy</a>.</span>
+      </label>
+
+      <div class="form-submit-row">
+        <button class="btn btn--primary btn--large btn--full" type="submit">Get matched with a {{trade.name}}</button>
+        <small>Free. No obligation. Average response under one hour.</small>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Need someone today?</h2>
+    <p>Skip the form. Call us and we'll match you on the phone.</p>
+    <div style="margin-top: var(--space-5); display:flex; gap: var(--space-3); justify-content:center; flex-wrap:wrap;">
+      <a href="tel:{{brand.phone}}" class="btn btn--primary btn--large">Call {{brand.phone}}</a>
+      <a href="#contact" class="btn btn--ghost btn--large">Use the form instead</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container container--narrow">
+    <header class="section-header">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common questions from {{market.city}} homeowners</h2>
+    </header>
+    <div class="faq">
+      <details>
+        <summary>Is this really free?</summary>
+        <div class="faq__body"><p>Yes. {{brand.consumerName}} is free for homeowners. Local {{market.city}} {{trade.namePlural}} pay us a small fee for each match — so you get a real local pro without the markup of a national platform.</p></div>
+      </details>
+      <details>
+        <summary>How fast will I hear back?</summary>
+        <div class="faq__body"><p>Most matches happen within an hour during business hours. Emergencies are routed first. If we can't find a match, we'll tell you the same day — we never leave you hanging.</p></div>
+      </details>
+      <details>
+        <summary>How many {{trade.namePlural}} will contact me?</summary>
+        <div class="faq__body"><p>At most three. Often just one. We're not Angi or Thumbtack — your phone won't ring for weeks. If you want a single exclusive match, just say so in the notes.</p></div>
+      </details>
+      <details>
+        <summary>How do you vet the {{trade.namePlural}}?</summary>
+        <div class="faq__body"><p>Every pro on our list is licensed in {{market.state}}, insured, and has been actively serving {{market.county}} for at least two years. We check Google and BBB reviews quarterly and drop anyone who slips.</p></div>
+      </details>
+      <details>
+        <summary>What if I just want a quote?</summary>
+        <div class="faq__body"><p>That's fine — just pick "Just getting a quote" on the form. We'll match you with a pro who's comfortable doing free estimates and won't pressure you.</p></div>
+      </details>
+      <details>
+        <summary>Will my info be sold?</summary>
+        <div class="faq__body"><p>No. Your details go to the matched {{trade.name}} only. We don't sell to data brokers, marketing lists, or third-party platforms. See our <a href="privacy.html">privacy policy</a>.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <p style="font-weight:var(--fw-bold); color:var(--color-text-inverse); font-size:var(--fs-md); margin-bottom:var(--space-2);">{{brand.consumerName}}</p>
+      <p>Local {{trade.name}} matching for {{market.city}} and surrounding areas.</p>
+      <p style="margin-top:var(--space-3);">A service of {{brand.entityName}}.</p>
+    </div>
+    <div>
+      <h4>Service</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#contact">Get matched</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Areas</h4>
+      <ul>
+        <li>{{market.city}}, {{market.stateAbbr}}</li>
+        <li>{{market.surroundingAreas}}</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:{{brand.phone}}">{{brand.phone}}</a></li>
+        <li><a href="mailto:{{brand.email}}">{{brand.email}}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <span>&copy; {{brand.entityName}}. All rights reserved.</span>
+    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
