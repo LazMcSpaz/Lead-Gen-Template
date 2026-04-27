@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guides for {{market.city}} homeowners — {{brand.consumerName}}</title>
+  <meta name="description" content="{{blog.intro}}">
+  <link rel="canonical" href="https://{{brand.consumerDomain}}/blog/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-header__brand" href="../">{{market.city}} <span>Home Connect</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../#services">Services</a>
+      <a href="../#how-it-works">How it works</a>
+      <a href="./">Guides</a>
+      <a href="../#faq">FAQ</a>
+      <a href="../#contact">Get matched</a>
+    </nav>
+    <a class="site-header__phone" href="tel:{{brand.phone}}">{{brand.phone}}</a>
+  </div>
+</header>
+
+<main>
+<section class="section">
+  <div class="container container--narrow">
+    <a class="back-link" href="../">Back to home</a>
+    <header class="section-header">
+      <span class="eyebrow">Guides</span>
+      <h1>{{trade.nameDisplay}} guides for {{market.city}} homeowners</h1>
+      <p class="lead">{{blog.intro}}</p>
+    </header>
+  </div>
+  <div class="container">
+    <div class="blog-strip">
+      <a class="post-card" href="post-1.html">
+        <div class="post-card__media"><img src="{{blog.posts.0.image}}" alt="{{blog.posts.0.imageAlt}}" loading="lazy"></div>
+        <div class="post-card__body">
+          <div class="post-card__meta"><span>{{blog.posts.0.date}}</span><span>{{blog.posts.0.readMinutes}} min read</span></div>
+          <h3 class="post-card__title">{{blog.posts.0.title}}</h3>
+          <p class="post-card__excerpt">{{blog.posts.0.excerpt}}</p>
+          <span class="post-card__readmore">Read</span>
+        </div>
+      </a>
+      <a class="post-card" href="post-2.html">
+        <div class="post-card__media"><img src="{{blog.posts.1.image}}" alt="{{blog.posts.1.imageAlt}}" loading="lazy"></div>
+        <div class="post-card__body">
+          <div class="post-card__meta"><span>{{blog.posts.1.date}}</span><span>{{blog.posts.1.readMinutes}} min read</span></div>
+          <h3 class="post-card__title">{{blog.posts.1.title}}</h3>
+          <p class="post-card__excerpt">{{blog.posts.1.excerpt}}</p>
+          <span class="post-card__readmore">Read</span>
+        </div>
+      </a>
+      <a class="post-card" href="post-3.html">
+        <div class="post-card__media"><img src="{{blog.posts.2.image}}" alt="{{blog.posts.2.imageAlt}}" loading="lazy"></div>
+        <div class="post-card__body">
+          <div class="post-card__meta"><span>{{blog.posts.2.date}}</span><span>{{blog.posts.2.readMinutes}} min read</span></div>
+          <h3 class="post-card__title">{{blog.posts.2.title}}</h3>
+          <p class="post-card__excerpt">{{blog.posts.2.excerpt}}</p>
+          <span class="post-card__readmore">Read</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Ready to talk to a {{trade.name}}?</h2>
+    <p>Skip the reading. We'll match you with a vetted {{market.city}} pro in under an hour.</p>
+    <div style="margin-top: var(--space-5); display:flex; gap: var(--space-3); justify-content:center; flex-wrap:wrap;">
+      <a href="../#contact" class="btn btn--primary btn--large">Get matched</a>
+      <a href="tel:{{brand.phone}}" class="btn btn--ghost btn--large">Call {{brand.phone}}</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <p style="font-weight:var(--fw-bold); color:var(--color-text-inverse); font-size:var(--fs-md); margin-bottom:var(--space-2);">{{brand.consumerName}}</p>
+      <p>Local {{trade.name}} matching for {{market.city}} and surrounding areas.</p>
+    </div>
+    <div>
+      <h4>Service</h4>
+      <ul>
+        <li><a href="../#services">Services</a></li>
+        <li><a href="../#how-it-works">How it works</a></li>
+        <li><a href="../#contact">Get matched</a></li>
+        <li><a href="./">Guides</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:{{brand.phone}}">{{brand.phone}}</a></li>
+        <li><a href="mailto:{{brand.email}}">{{brand.email}}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <span>&copy; {{brand.entityName}}. All rights reserved.</span>
+    <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a></span>
+  </div>
+</footer>
+</body>
+</html>

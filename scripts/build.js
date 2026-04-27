@@ -108,7 +108,7 @@ function walkLeaves(node, pathParts, visit) {
   visit(pathParts.join('.'), node);
 }
 
-function validateConfig(config) {
+function validateConfig(config, configPath) {
   const problems = [];
   walkLeaves(config, [], (dotted, value) => {
     if (value === null || value === undefined) {
@@ -125,8 +125,9 @@ function validateConfig(config) {
     }
   });
   if (problems.length > 0) {
+    const rel = path.relative(ROOT, configPath);
     fail([
-      `config/market.json has ${problems.length} unpopulated field(s):`,
+      `${rel} has ${problems.length} unpopulated field(s):`,
       ...problems.map((p) => `  - ${p}`),
       '',
       'Replace every placeholder value with a real one and run the build again.',
@@ -288,7 +289,7 @@ function fail(lines) {
 function main() {
   const args = parseArgs(process.argv);
   const config = loadConfig(args.configPath);
-  validateConfig(config);
+  validateConfig(config, args.configPath);
   emptyDir(DIST_DIR);
   const fileCount = walkSrc(config);
   generateSitemap(config);

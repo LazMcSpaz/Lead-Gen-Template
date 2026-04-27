@@ -24,6 +24,7 @@
     <nav class="site-nav" aria-label="Primary">
       <a href="#services">Services</a>
       <a href="#how-it-works">How it works</a>
+      <a href="blog/">Guides</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Get matched</a>
     </nav>
@@ -44,6 +45,15 @@
         <a href="tel:{{brand.phone}}" class="btn btn--ghost btn--large">Call {{brand.phone}}</a>
       </div>
     </div>
+    <figure class="hero__media">
+      <img src="{{images.heroPhoto}}" alt="{{images.heroPhotoAlt}}" loading="eager">
+      <figcaption class="hero__media-caption">Serving {{market.city}}, {{market.stateAbbr}}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
     <div class="trust-strip" aria-label="At a glance">
       <div class="trust-strip__item"><strong>&lt; 1 hr</strong>Average match time</div>
       <div class="trust-strip__item"><strong>$0</strong>Cost to homeowners</div>
@@ -58,38 +68,44 @@
     <header class="section-header">
       <span class="eyebrow">What we cover</span>
       <h2>Common {{trade.name}} jobs in {{market.city}}</h2>
-      <p class="lead">Whether it's an emergency, a planned upgrade, or a quote you've been putting off, we'll match you with a {{market.city}}-area {{trade.name}} who handles exactly this kind of work.</p>
+      <p class="lead">Whether something just stopped working, you're upgrading, or you're planning a bigger project, we'll match you with a {{market.city}}-area pro who handles exactly this kind of work.</p>
     </header>
     <div class="grid grid--services">
       <article class="card">
-        <span class="card__eyebrow">Service</span>
+        <span class="card__eyebrow">Most common</span>
         <h3 class="card__title">{{trade.services.0}}</h3>
-        <p class="card__body">Older {{market.city}} homes often need a panel upgrade before adding modern loads. We match you with pros who pull the permit and handle the utility coordination.</p>
+        <p class="card__body">Outlets that stopped working, breakers that won't reset, flickering lights, mystery sparking. Same-day matches when it's urgent.</p>
         <a class="card__link" href="#contact">Get a quote</a>
       </article>
       <article class="card">
         <span class="card__eyebrow">Service</span>
         <h3 class="card__title">{{trade.services.1}}</h3>
-        <p class="card__body">Level-2 EV charger installs, panel checks, and {{market.stateAbbr}} rebate paperwork — handled by a vetted local installer.</p>
+        <p class="card__body">New outlets, three-way switches, ceiling fans, recessed and pendant lighting, dimmers, and smart switches.</p>
         <a class="card__link" href="#contact">Get a quote</a>
       </article>
       <article class="card">
         <span class="card__eyebrow">Service</span>
         <h3 class="card__title">{{trade.services.2}}</h3>
-        <p class="card__body">Flickering lights, dead outlets, breakers that won't reset. Same-day matches when it's urgent.</p>
+        <p class="card__body">100A → 200A panel upgrades for older {{market.city}} homes. Permit and utility coordination handled by your matched pro.</p>
         <a class="card__link" href="#contact">Get a quote</a>
       </article>
       <article class="card">
         <span class="card__eyebrow">Service</span>
         <h3 class="card__title">{{trade.services.3}}</h3>
-        <p class="card__body">Knob-and-tube replacements and full rewires for older {{market.county}} properties. Inspection-ready work.</p>
+        <p class="card__body">Level-2 charger installs, panel checks, and {{market.stateAbbr}} rebate paperwork — handled by a vetted local installer.</p>
         <a class="card__link" href="#contact">Get a quote</a>
       </article>
       <article class="card">
         <span class="card__eyebrow">Service</span>
         <h3 class="card__title">{{trade.services.4}}</h3>
-        <p class="card__body">Standby and portable generator hookups with proper transfer switches. Critical for {{market.city}} winter outages.</p>
+        <p class="card__body">Whole-home rewiring, generator hookups, knob-and-tube replacements, additions, and inspection-ready work for major projects.</p>
         <a class="card__link" href="#contact">Get a quote</a>
+      </article>
+      <article class="card">
+        <span class="card__eyebrow">Don't see it?</span>
+        <h3 class="card__title">Something else</h3>
+        <p class="card__body">If you're not sure what you need or your job doesn't fit a label, just describe it on the form. We'll match you anyway.</p>
+        <a class="card__link" href="#contact">Tell us about it</a>
       </article>
     </div>
   </div>
@@ -105,7 +121,7 @@
       <article class="card">
         <span class="card__eyebrow">Step 1</span>
         <h3 class="card__title">Tell us what you need</h3>
-        <p class="card__body">Answer four short questions about the job, your timeline, and your address. That's it.</p>
+        <p class="card__body">A few quick questions about the job, your timeline, and your address. No guessing required.</p>
       </article>
       <article class="card">
         <span class="card__eyebrow">Step 2</span>
@@ -121,6 +137,14 @@
   </div>
 </section>
 
+<section class="local-banner" aria-label="Local proof">
+  <img class="local-banner__bg" src="{{images.localBanner}}" alt="{{images.localBannerAlt}}" loading="lazy">
+  <div class="container container--narrow">
+    <h2>We know {{market.city}} homes.</h2>
+    <p>Every {{trade.name}} we match is licensed in {{market.state}}, insured, and has worked {{market.county}} for at least two years. No out-of-state lead farms. No call centers. Just local pros who pick up.</p>
+  </div>
+</section>
+
 <section class="section section--surface" id="contact">
   <div class="container container--narrow">
     <header class="section-header" style="text-align:center;margin-inline:auto;">
@@ -129,118 +153,254 @@
       <p class="lead mx-auto" style="margin-inline:auto;">Free, no obligation. Most {{market.city}} homeowners hear back from a matched {{trade.name}} within an hour.</p>
     </header>
 
-    <form class="lead-form" name="{{integrations.netlifyFormName}}" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <form class="lead-form" id="lead-form" name="{{integrations.netlifyFormName}}" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
       <input type="hidden" name="form-name" value="{{integrations.netlifyFormName}}">
       <input type="hidden" name="lead-temperature" value="">
       <input type="hidden" name="source-page" value="homepage">
       <p class="form-honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
 
-      <div class="form-group">
-        <label class="form-label" for="name">Your name <span class="required" aria-hidden="true">*</span></label>
-        <input class="form-input" type="text" id="name" name="name" required autocomplete="name">
+      <div class="form-progress" aria-hidden="true">
+        <div class="form-progress__bar">
+          <span class="form-progress__segment"></span>
+          <span class="form-progress__segment"></span>
+          <span class="form-progress__segment"></span>
+        </div>
+        <div class="form-progress__label">
+          <span>Step <strong class="form-progress__current">1</strong> of <strong class="form-progress__total">3</strong></span>
+          <span>About 60 seconds</span>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="phone">Phone <span class="required" aria-hidden="true">*</span></label>
-        <input class="form-input" type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="{{market.areaCode}}-555-0100">
-      </div>
+      <!-- Step 1: What's the job? -->
+      <fieldset class="form-step" data-step="1">
+        <h3 class="form-step__title">What's the job?</h3>
+        <p class="form-step__hint">Pick the closest match — you'll have room to add details on the next step.</p>
 
-      <div class="form-group">
-        <label class="form-label" for="address">Property address <span class="required" aria-hidden="true">*</span></label>
-        <input class="form-input" type="text" id="address" name="address" required autocomplete="street-address" placeholder="123 Main St, {{market.city}}, {{market.stateAbbr}}">
-        <span class="form-hint">Used to match you with a {{trade.name}} who serves your area.</span>
-      </div>
+        <div class="form-group">
+          <span class="form-label">Service needed <span class="required" aria-hidden="true">*</span></span>
+          <div class="radio-group radio-group--2col">
+            <label class="radio-card">
+              <input type="radio" name="service" value="{{trade.services.0}}" required>
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">{{trade.services.0}}</span>
+                <span class="radio-card__desc">Something not working right</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="service" value="{{trade.services.1}}">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">{{trade.services.1}}</span>
+                <span class="radio-card__desc">Outlets, switches, fans, lights</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="service" value="{{trade.services.2}}">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">{{trade.services.2}}</span>
+                <span class="radio-card__desc">More capacity, EV-ready</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="service" value="{{trade.services.3}}">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">{{trade.services.3}}</span>
+                <span class="radio-card__desc">Level-2 home charger</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="service" value="{{trade.services.4}}">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">{{trade.services.4}}</span>
+                <span class="radio-card__desc">Rewires, generators, additions</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="service" value="Something else">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">Something else</span>
+                <span class="radio-card__desc">Not sure / different job</span>
+              </span>
+            </label>
+          </div>
+          <div class="form-other-input">
+            <label class="form-label" for="service-other">Briefly describe the job</label>
+            <input class="form-input" type="text" id="service-other" name="service-other" placeholder="e.g. add a 240V circuit for a hot tub">
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label class="form-label" for="service">Service needed</label>
-        <select class="form-select" id="service" name="service">
-          <option value="{{trade.services.0}}">{{trade.services.0}}</option>
-          <option value="{{trade.services.1}}">{{trade.services.1}}</option>
-          <option value="{{trade.services.2}}">{{trade.services.2}}</option>
-          <option value="{{trade.services.3}}">{{trade.services.3}}</option>
-          <option value="{{trade.services.4}}">{{trade.services.4}}</option>
-          <option value="Other">Other / not sure</option>
-        </select>
-      </div>
+        <fieldset class="form-group">
+          <legend class="form-label">What kind of need is this? <span class="required" aria-hidden="true">*</span></legend>
+          <div class="radio-group radio-group--2col">
+            <label class="radio-card">
+              <input type="radio" name="urgency" value="emergency" required>
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">Emergency / urgent</span>
+                <span class="radio-card__desc">Something's broken right now</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="urgency" value="scheduled">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">Scheduled service</span>
+                <span class="radio-card__desc">Planned, not urgent</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="urgency" value="quote">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">Just getting a quote</span>
+                <span class="radio-card__desc">Comparing options</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="urgency" value="info">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text">
+                <span class="radio-card__title">Just researching</span>
+                <span class="radio-card__desc">Not ready to book</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
 
-      <fieldset class="form-group">
-        <legend class="form-label">What do you need help with?</legend>
-        <div class="radio-group radio-group--2col">
-          <label class="radio-card">
-            <input type="radio" name="urgency" value="emergency">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text">
-              <span class="radio-card__title">Emergency / urgent</span>
-              <span class="radio-card__desc">Something's broken right now</span>
-            </span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="urgency" value="scheduled">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text">
-              <span class="radio-card__title">Scheduled service</span>
-              <span class="radio-card__desc">Planned work, not urgent</span>
-            </span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="urgency" value="quote">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text">
-              <span class="radio-card__title">Just getting a quote</span>
-              <span class="radio-card__desc">Comparing options</span>
-            </span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="urgency" value="info">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text">
-              <span class="radio-card__title">Just researching</span>
-              <span class="radio-card__desc">Not ready to book yet</span>
-            </span>
-          </label>
+        <div class="form-step__nav">
+          <button type="button" class="btn btn--primary btn--large" data-form-next>Continue →</button>
         </div>
       </fieldset>
 
-      <fieldset class="form-group">
-        <legend class="form-label">How soon do you need this?</legend>
-        <div class="radio-group radio-group--2col">
-          <label class="radio-card">
-            <input type="radio" name="timeline" value="48h">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text"><span class="radio-card__title">Within 24–48 hours</span></span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="timeline" value="week">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text"><span class="radio-card__title">This week</span></span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="timeline" value="month">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text"><span class="radio-card__title">Within a month</span></span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="timeline" value="unsure">
-            <span class="radio-card__indicator" aria-hidden="true"></span>
-            <span class="radio-card__text"><span class="radio-card__title">Unsure / flexible</span></span>
-          </label>
+      <!-- Step 2: Tell us more -->
+      <fieldset class="form-step" data-step="2">
+        <h3 class="form-step__title">Tell us a bit more</h3>
+        <p class="form-step__hint">Helps us match you with the right pro on the first try.</p>
+
+        <fieldset class="form-group">
+          <legend class="form-label">How soon do you need this? <span class="required" aria-hidden="true">*</span></legend>
+          <div class="radio-group radio-group--2col">
+            <label class="radio-card">
+              <input type="radio" name="timeline" value="48h" required>
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">Within 24–48 hours</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="timeline" value="week">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">This week</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="timeline" value="month">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">Within a month</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="timeline" value="unsure">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">Unsure / flexible</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <legend class="form-label">Is this your property? <span class="required" aria-hidden="true">*</span></legend>
+          <div class="radio-group radio-group--2col">
+            <label class="radio-card">
+              <input type="radio" name="ownership" value="owner" required>
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">Yes, I own it</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="ownership" value="manager">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">I manage it</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="ownership" value="renter">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">I rent it</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <legend class="form-label">Have you contacted other {{trade.namePlural}}? <span class="required" aria-hidden="true">*</span></legend>
+          <div class="radio-group radio-group--2col">
+            <label class="radio-card">
+              <input type="radio" name="competition" value="first" required>
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">No, first call</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="competition" value="few">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">Comparing a few</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="competition" value="broad">
+              <span class="radio-card__indicator" aria-hidden="true"></span>
+              <span class="radio-card__text"><span class="radio-card__title">Shopping broadly</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-step__nav">
+          <button type="button" class="btn btn--ghost" data-form-back>← Back</button>
+          <button type="button" class="btn btn--primary btn--large" data-form-next>Continue →</button>
         </div>
       </fieldset>
 
-      <div class="form-group">
-        <label class="form-label" for="notes">Anything else we should know?</label>
-        <textarea class="form-textarea" id="notes" name="notes" placeholder="Optional — describe the job, access notes, anything that helps a pro give you a real quote."></textarea>
-      </div>
+      <!-- Step 3: Contact info -->
+      <fieldset class="form-step is-last" data-step="3">
+        <h3 class="form-step__title">How do we reach you?</h3>
+        <p class="form-step__hint">A matched {{trade.name}} will text or call within an hour. We never sell your info.</p>
 
-      <label class="form-consent">
-        <input type="checkbox" name="consent" required>
-        <span>I agree to be contacted by a {{market.city}}-area {{trade.name}} regarding this request. I understand my info is shared with at most three local pros and never sold. <a href="privacy.html">Privacy policy</a>.</span>
-      </label>
+        <div class="form-group">
+          <label class="form-label" for="name">Your name <span class="required" aria-hidden="true">*</span></label>
+          <input class="form-input" type="text" id="name" name="name" required autocomplete="name">
+        </div>
 
-      <div class="form-submit-row">
-        <button class="btn btn--primary btn--large btn--full" type="submit">Get matched with a {{trade.name}}</button>
-        <small>Free. No obligation. Average response under one hour.</small>
-      </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone <span class="required" aria-hidden="true">*</span></label>
+          <input class="form-input" type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="{{market.areaCode}}-555-0100">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="address">Property address <span class="required" aria-hidden="true">*</span></label>
+          <input class="form-input" type="text" id="address" name="address" required autocomplete="street-address" placeholder="123 Main St, {{market.city}}, {{market.stateAbbr}}">
+          <span class="form-hint">Used to match you with a {{trade.name}} who serves your area.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email <span class="form-hint" style="font-weight:var(--fw-regular);">(optional, for confirmation)</span></label>
+          <input class="form-input" type="email" id="email" name="email" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="notes">Anything else we should know?</label>
+          <textarea class="form-textarea" id="notes" name="notes" placeholder="Optional — describe the job, access notes, anything that helps a pro give you a real quote."></textarea>
+        </div>
+
+        <label class="form-consent">
+          <input type="checkbox" name="consent" required>
+          <span>I agree to be contacted by a {{market.city}}-area {{trade.name}} regarding this request. I understand my info is shared with at most three local pros and never sold. <a href="privacy.html">Privacy policy</a>.</span>
+        </label>
+
+        <div class="form-step__nav">
+          <button type="button" class="btn btn--ghost" data-form-back>← Back</button>
+        </div>
+
+        <div class="form-submit-row">
+          <button class="btn btn--primary btn--large btn--full" type="submit">Get matched with a {{trade.name}}</button>
+          <small>Free. No obligation. Average response under one hour.</small>
+        </div>
+      </fieldset>
     </form>
   </div>
 </section>
@@ -256,7 +416,47 @@
   </div>
 </section>
 
-<section class="section" id="faq">
+<section class="section">
+  <div class="container">
+    <header class="section-header">
+      <span class="eyebrow">From the blog</span>
+      <h2>Guides for {{market.city}} homeowners</h2>
+      <p class="lead">Pricing, timelines, and what to ask before you book.</p>
+    </header>
+    <div class="blog-strip">
+      <a class="post-card" href="blog/post-1.html">
+        <div class="post-card__media"><img src="{{blog.posts.0.image}}" alt="{{blog.posts.0.imageAlt}}" loading="lazy"></div>
+        <div class="post-card__body">
+          <div class="post-card__meta"><span>{{blog.posts.0.date}}</span><span>{{blog.posts.0.readMinutes}} min read</span></div>
+          <h3 class="post-card__title">{{blog.posts.0.title}}</h3>
+          <p class="post-card__excerpt">{{blog.posts.0.excerpt}}</p>
+          <span class="post-card__readmore">Read</span>
+        </div>
+      </a>
+      <a class="post-card" href="blog/post-2.html">
+        <div class="post-card__media"><img src="{{blog.posts.1.image}}" alt="{{blog.posts.1.imageAlt}}" loading="lazy"></div>
+        <div class="post-card__body">
+          <div class="post-card__meta"><span>{{blog.posts.1.date}}</span><span>{{blog.posts.1.readMinutes}} min read</span></div>
+          <h3 class="post-card__title">{{blog.posts.1.title}}</h3>
+          <p class="post-card__excerpt">{{blog.posts.1.excerpt}}</p>
+          <span class="post-card__readmore">Read</span>
+        </div>
+      </a>
+      <a class="post-card" href="blog/post-3.html">
+        <div class="post-card__media"><img src="{{blog.posts.2.image}}" alt="{{blog.posts.2.imageAlt}}" loading="lazy"></div>
+        <div class="post-card__body">
+          <div class="post-card__meta"><span>{{blog.posts.2.date}}</span><span>{{blog.posts.2.readMinutes}} min read</span></div>
+          <h3 class="post-card__title">{{blog.posts.2.title}}</h3>
+          <p class="post-card__excerpt">{{blog.posts.2.excerpt}}</p>
+          <span class="post-card__readmore">Read</span>
+        </div>
+      </a>
+    </div>
+    <p style="margin-top: var(--space-5); text-align:center;"><a href="blog/" class="btn btn--ghost">All guides →</a></p>
+  </div>
+</section>
+
+<section class="section section--surface" id="faq">
   <div class="container container--narrow">
     <header class="section-header">
       <span class="eyebrow">FAQ</span>
@@ -306,6 +506,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#how-it-works">How it works</a></li>
         <li><a href="#contact">Get matched</a></li>
+        <li><a href="blog/">Guides</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </div>
@@ -330,5 +531,6 @@
   </div>
 </footer>
 
+<script src="js/form-steps.js" defer></script>
 </body>
 </html>

@@ -16,11 +16,11 @@
     "nameDisplay": "Electrician",
     "namePlural": "electricians",
     "services": [
+      "Repair & Troubleshooting",
+      "Outlets, Switches & Lighting",
       "Panel Upgrade",
       "EV Charger Installation",
-      "Electrical Repair",
-      "Whole-Home Rewiring",
-      "Generator Hookup"
+      "Major Project (Rewire / Generator)"
     ],
     "primaryKeyword": "electrician Eugene OR",
     "emergencyUrgency": true
@@ -39,6 +39,49 @@
     "titleSuffix": "Eugene, OR",
     "metaDescription": "Free local {{trade.name}} matching service for {{market.city}} homeowners. Tell us what you need — we'll connect you with a vetted local pro within the hour.",
     "gmbCategory": "Marketing Agency"
+  },
+
+  "images": {
+    "heroPhoto": "https://picsum.photos/seed/eugene-home/1200/900",
+    "heroPhotoAlt": "A Eugene-area home",
+    "localBanner": "https://picsum.photos/seed/eugene-neighborhood/1600/700",
+    "localBannerAlt": "Eugene neighborhood"
+  },
+
+  "blog": {
+    "intro": "Practical guides for {{market.city}} homeowners. Pricing, timelines, and what to ask before you book a {{trade.name}}.",
+    "posts": [
+      {
+        "title": "How much does a panel upgrade cost in {{market.city}}?",
+        "slug": "panel-upgrade-cost",
+        "excerpt": "What {{market.city}} homeowners actually pay for a 200-amp panel upgrade in 2025, plus the three things that swing the price the most.",
+        "image": "https://picsum.photos/seed/blog-panel/1200/700",
+        "imageAlt": "Electrical panel being upgraded",
+        "date": "2025-09-01",
+        "readMinutes": 6,
+        "body": "<p>Replace this with the locally adapted post body. Use the buyer-agreement template tone: facts first, no fluff.</p><p>This stub exists to demonstrate layout. The build script substitutes city, trade, and post metadata from config; the body comes verbatim from the config string for now.</p>"
+      },
+      {
+        "title": "EV charger install in {{market.city}}: what to know first",
+        "slug": "ev-charger-install",
+        "excerpt": "Permit rules, panel capacity, and {{market.stateAbbr}} rebates that change the install math.",
+        "image": "https://picsum.photos/seed/blog-ev/1200/700",
+        "imageAlt": "Level 2 EV charger on a garage wall",
+        "date": "2025-08-18",
+        "readMinutes": 5,
+        "body": "<p>Replace this with the locally adapted post body.</p><p>For real deployments, generate the post with Claude using local facts (utility names, rebate IDs, common neighborhoods) and paste here.</p>"
+      },
+      {
+        "title": "Older {{market.city}} home? Five wiring red flags",
+        "slug": "old-home-wiring-red-flags",
+        "excerpt": "Knob-and-tube, aluminum branch, undersized panels — the warning signs a home inspector flags first.",
+        "image": "https://picsum.photos/seed/blog-old-home/1200/700",
+        "imageAlt": "Older home interior",
+        "date": "2025-08-04",
+        "readMinutes": 7,
+        "body": "<p>Replace this with the locally adapted post body.</p>"
+      }
+    ]
   },
 
   "integrations": {

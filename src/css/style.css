@@ -563,6 +563,192 @@ blockquote {
   }
 }
 
+/* 16. Hero media & local-proof banner ------------------------ */
+.hero__media {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: var(--shadow-card);
+  background: var(--color-surface);
+}
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero__media-caption {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--color-text-inverse);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.05em;
+}
+
+.local-banner {
+  position: relative;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-4);
+  color: var(--color-text-inverse);
+  text-align: center;
+  background: var(--color-secondary);
+  overflow: hidden;
+  isolation: isolate;
+}
+.local-banner__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.local-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(31, 78, 121, 0.85) 0%, rgba(0, 112, 60, 0.65) 100%);
+  z-index: -1;
+}
+.local-banner h2 { color: var(--color-text-inverse); }
+.local-banner p { color: rgba(255, 255, 255, 0.92); max-width: 56ch; margin-inline: auto; }
+
+/* 17. Multi-step form ------------------------------------------ */
+.form-progress {
+  display: none;
+  margin-bottom: var(--space-6);
+}
+.lead-form.is-stepped .form-progress { display: block; }
+
+.form-progress__bar {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.form-progress__segment {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+  transition: background var(--transition-base);
+}
+.form-progress__segment.is-complete { background: var(--color-primary); }
+.form-progress__segment.is-active {
+  background: linear-gradient(90deg, var(--color-primary) 50%, var(--color-border) 50%);
+}
+.form-progress__label {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+}
+.form-progress__label strong { color: var(--color-text); font-weight: var(--fw-semibold); }
+
+.form-step__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  margin: 0 0 var(--space-2);
+}
+.form-step__hint {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin: 0 0 var(--space-5);
+}
+
+.lead-form.is-stepped .form-step { display: none; }
+.lead-form.is-stepped .form-step.is-active { display: block; }
+
+.form-step__nav {
+  display: none;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+.lead-form.is-stepped .form-step__nav { display: flex; }
+.form-step__nav .btn { flex: 1; }
+.form-step__nav .btn--ghost { flex: 0 0 auto; }
+
+.lead-form.is-stepped .form-submit-row { display: none; }
+.lead-form.is-stepped .form-step.is-last .form-submit-row { display: flex; }
+
+/* "Other / something else" reveal */
+.form-other-input { display: none; margin-top: var(--space-3); }
+.form-other-input.is-visible { display: block; }
+
+/* 18. Blog ----------------------------------------------------- */
+.blog-strip {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.post-card {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.post-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-elevated); color: var(--color-text); }
+.post-card__media { aspect-ratio: 16 / 10; background: var(--color-surface); overflow: hidden; }
+.post-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.post-card__body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); flex-grow: 1; }
+.post-card__meta { font-size: var(--fs-xs); color: var(--color-text-muted); display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.post-card__title { font-size: var(--fs-lg); font-weight: var(--fw-semibold); margin: 0; line-height: var(--lh-snug); }
+.post-card__excerpt { color: var(--color-text-muted); margin: 0; flex-grow: 1; }
+.post-card__readmore { font-weight: var(--fw-semibold); color: var(--color-primary); margin-top: auto; }
+.post-card__readmore::after { content: " →"; }
+
+/* Single post page */
+.post {
+  max-width: 720px;
+  margin-inline: auto;
+}
+.post__hero {
+  margin-bottom: var(--space-6);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--color-surface);
+}
+.post__hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.post__meta {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+.post__title { margin-bottom: var(--space-5); }
+.post__body p { font-size: var(--fs-md); line-height: var(--lh-base); }
+.post__body h2 { margin-top: var(--space-7); }
+.post__body h3 { margin-top: var(--space-6); }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  margin-bottom: var(--space-5);
+  text-decoration: none;
+}
+.back-link::before { content: "←"; }
+
 @media print {
   .site-header, .site-footer, .cta-band, .hero__cta-row, form { display: none; }
   body { background: #fff; color: #000; }
