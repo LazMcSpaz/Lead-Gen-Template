@@ -107,5 +107,9 @@
     "exclusiveCool": 45,
     "exclusiveWarm": 72,
     "exclusiveHot": 105
+  },
+
+  "legal": {
+    "effectiveDate": "2025-01-01"
   }
 }

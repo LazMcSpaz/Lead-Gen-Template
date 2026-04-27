@@ -1,0 +1,20 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{post.title}}",
+  "description": "{{post.excerpt}}",
+  "image": "{{post.image}}",
+  "datePublished": "{{post.date}}",
+  "author": {
+    "@type": "Organization",
+    "name": "{{brand.consumerName}}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{brand.consumerName}}",
+    "url": "https://{{brand.consumerDomain}}/"
+  },
+  "mainEntityOfPage": "https://{{brand.consumerDomain}}/blog/{{post.slug}}.html"
+}
+</script>

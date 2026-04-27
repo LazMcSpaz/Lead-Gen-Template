@@ -1,0 +1,33 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "{{brand.consumerName}}",
+  "description": "{{seo.metaDescription}}",
+  "url": "https://{{brand.consumerDomain}}/",
+  "telephone": "{{brand.phone}}",
+  "email": "{{brand.email}}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "{{market.city}}",
+    "addressRegion": "{{market.stateAbbr}}",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    "{{market.city}}, {{market.stateAbbr}}",
+    "{{market.county}}, {{market.stateAbbr}}",
+    "{{market.surroundingAreas}}"
+  ],
+  "knowsAbout": [
+    "{{trade.services.0}}",
+    "{{trade.services.1}}",
+    "{{trade.services.2}}",
+    "{{trade.services.3}}",
+    "{{trade.services.4}}"
+  ],
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "{{brand.entityName}}"
+  }
+}
+</script>

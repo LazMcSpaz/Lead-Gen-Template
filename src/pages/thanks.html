@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- @include head-common.html -->
+  <title>Thanks — we're matching you now</title>
+  <meta name="description" content="Your request is in. A vetted {{market.city}} {{trade.name}} will reach out shortly.">
+  <meta name="robots" content="noindex">
+</head>
+<body>
+
+<!-- @include header.html -->
+
+<main>
+<section class="section">
+  <div class="container container--narrow text-center">
+    <header class="section-header" style="margin-inline:auto;">
+      <span class="eyebrow">Request received</span>
+      <h1>Thanks — we're matching you now.</h1>
+      <p class="lead mx-auto" style="margin-inline:auto;">A vetted {{market.city}} {{trade.name}} will reach out by phone or text within an hour during business hours. If your request was urgent, you've been routed first.</p>
+    </header>
+
+    <div class="trust-strip" style="margin-bottom: var(--space-7);">
+      <div class="trust-strip__item"><strong>1</strong>Request received</div>
+      <div class="trust-strip__item"><strong>2</strong>Matching now</div>
+      <div class="trust-strip__item"><strong>3</strong>You'll hear back &lt; 1 hr</div>
+      <div class="trust-strip__item"><strong>0</strong>Spam emails</div>
+    </div>
+
+    <h2 style="margin-top:var(--space-7);">In the meantime</h2>
+    <p class="lead mx-auto" style="margin-inline:auto;">If your job is genuinely urgent — power out, sparking, smoke — call us directly so we can route you faster.</p>
+    <div style="display:flex; gap: var(--space-3); justify-content:center; flex-wrap:wrap; margin-top: var(--space-5);">
+      <a href="tel:{{brand.phone}}" class="btn btn--primary btn--large">Call {{brand.phone}}</a>
+      <a href="blog/" class="btn btn--ghost btn--large">Browse guides while you wait</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- @include footer.html -->
+
+</body>
+</html>

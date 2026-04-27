@@ -2,12 +2,19 @@
 /**
  * Emerald Lead Co. — Site Template Build Script
  *
- * Reads config/market.json, walks /src, replaces every {{dotted.path}}
- * placeholder with the corresponding config value, and writes the result
- * to /dist.
+ * Reads config/market.json, walks /src, expands <!-- @include partials/X.html -->
+ * directives, replaces every {{dotted.path}} placeholder with the corresponding
+ * config value, and writes the result to /dist.
  *
- * Placeholder syntax: {{market.city}}, {{trade.name}}, {{brand.phone}}, etc.
- * All paths resolve against the config object using dotted access.
+ * Special handling:
+ *  - src/partials/         — included via @include, never emitted directly
+ *  - src/schema/           — consumed at build time, never emitted directly
+ *  - files starting with _ — build-time templates (e.g. _post-template.html),
+ *                            never emitted directly
+ *  - src/pages/blog/_post-template.html
+ *                          — duplicated once per config.blog.posts[i] entry,
+ *                            output as dist/blog/<post.slug>.html
+ *  - dist/sitemap.xml      — generated programmatically from config (incl. blog)
  */
 
 const fs = require('fs');
@@ -16,8 +23,8 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const DEFAULT_CONFIG_PATH = path.join(ROOT, 'config', 'market.json');
 const SRC_DIR = path.join(ROOT, 'src');
+const PARTIALS_DIR = path.join(SRC_DIR, 'partials');
 const DIST_DIR = path.join(ROOT, 'dist');
-const SITEMAP_TEMPLATE = path.join(ROOT, 'sitemap-template.xml');
 const ROBOTS_TXT = path.join(ROOT, 'robots.txt');
 
 const TEXT_EXTENSIONS = new Set([
@@ -25,13 +32,15 @@ const TEXT_EXTENSIONS = new Set([
   '.xml', '.json', '.txt', '.md', '.svg', '.webmanifest',
 ]);
 
-// src/ subdirectories that are not deployed (consumed at build time only).
-const SRC_EXCLUDE_TOP = new Set(['schema']);
+// src/ subdirectories that are not deployed — consumed at build time only.
+const SRC_EXCLUDE_TOP = new Set(['schema', 'partials']);
 
 // Files under src/pages/ are routed at the dist root. Other src/ subdirs keep
 // their relative path. So src/pages/index.html → dist/index.html, but
 // src/css/style.css → dist/css/style.css.
 const SRC_FLATTEN_PREFIX = 'pages';
+
+const BLOG_POST_TEMPLATE = path.join(SRC_DIR, 'pages', 'blog', '_post-template.html');
 
 // Values shipped in market.example.json that must be replaced before a build is valid.
 const SENTINEL_VALUES = new Set([
@@ -47,7 +56,9 @@ const SENTINEL_VALUES = new Set([
 ]);
 
 const PLACEHOLDER_RE = /\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g;
+const INCLUDE_RE = /<!--\s*@include\s+([^\s>]+)\s*-->/g;
 const MAX_EXPANSION_PASSES = 5;
+const MAX_INCLUDE_DEPTH = 5;
 
 // ---------- args & load ----------
 
@@ -135,7 +146,27 @@ function validateConfig(config, configPath) {
   }
 }
 
-// ---------- resolve ----------
+// ---------- includes ----------
+
+function expandIncludes(text, source, depth) {
+  if (!INCLUDE_RE.test(text)) return text;
+  if (depth >= MAX_INCLUDE_DEPTH) {
+    fail([`Include depth in ${source} exceeded ${MAX_INCLUDE_DEPTH} levels (cycle?).`]);
+  }
+  return text.replace(INCLUDE_RE, (match, partialPath) => {
+    const abs = path.join(PARTIALS_DIR, partialPath);
+    if (!abs.startsWith(PARTIALS_DIR + path.sep)) {
+      fail([`${source}: include path "${partialPath}" escapes src/partials/.`]);
+    }
+    if (!fs.existsSync(abs)) {
+      fail([`${source}: include not found: src/partials/${partialPath}`]);
+    }
+    const inner = fs.readFileSync(abs, 'utf8');
+    return expandIncludes(inner, `partials/${partialPath}`, depth + 1);
+  });
+}
+
+// ---------- placeholder resolve ----------
 
 function getByPath(obj, dotted) {
   const parts = dotted.split('.');
@@ -153,7 +184,7 @@ function stringifyValue(value) {
   return String(value);
 }
 
-function replacePlaceholders(text, config, source) {
+function replacePlaceholders(text, context, source) {
   let out = text;
   let pass = 0;
   while (PLACEHOLDER_RE.test(out)) {
@@ -161,7 +192,7 @@ function replacePlaceholders(text, config, source) {
       fail([`Placeholder expansion in ${source} exceeded ${MAX_EXPANSION_PASSES} passes (cycle?).`]);
     }
     out = out.replace(PLACEHOLDER_RE, (match, dotted) => {
-      const value = getByPath(config, dotted);
+      const value = getByPath(context, dotted);
       if (value === undefined) {
         fail([`${source}: unknown placeholder {{${dotted}}} — no such path in config.`]);
       }
@@ -170,6 +201,15 @@ function replacePlaceholders(text, config, source) {
     pass += 1;
   }
   return out;
+}
+
+function processText(text, context, source) {
+  return replacePlaceholders(expandIncludes(text, source, 0), context, source);
+}
+
+function pathsFor(outRel) {
+  const depth = outRel.split(path.sep).length - 1;
+  return { root: depth === 0 ? './' : '../'.repeat(depth) };
 }
 
 // ---------- build ----------
@@ -199,6 +239,7 @@ function walkSrc(config) {
       const rel = path.relative(SRC_DIR, abs);
       const topDir = rel.split(path.sep)[0];
       if (SRC_EXCLUDE_TOP.has(topDir)) continue;
+      if (entry.name.startsWith('_')) continue;
       if (entry.isDirectory()) {
         stack.push(abs);
         continue;
@@ -210,7 +251,8 @@ function walkSrc(config) {
       const ext = path.extname(entry.name).toLowerCase();
       if (TEXT_EXTENSIONS.has(ext)) {
         const text = fs.readFileSync(abs, 'utf8');
-        fs.writeFileSync(out, replacePlaceholders(text, config, rel));
+        const ctx = Object.assign({}, config, { paths: pathsFor(outRel) });
+        fs.writeFileSync(out, processText(text, ctx, rel));
       } else {
         fs.copyFileSync(abs, out);
       }
@@ -220,13 +262,62 @@ function walkSrc(config) {
   return fileCount;
 }
 
+function generateBlogPosts(config) {
+  if (!fs.existsSync(BLOG_POST_TEMPLATE)) return 0;
+  if (!config.blog || !Array.isArray(config.blog.posts)) return 0;
+  const tmplRaw = fs.readFileSync(BLOG_POST_TEMPLATE, 'utf8');
+  const tmplExpanded = expandIncludes(tmplRaw, 'blog/_post-template.html', 0);
+  const outDir = path.join(DIST_DIR, 'blog');
+  fs.mkdirSync(outDir, { recursive: true });
+  let count = 0;
+  config.blog.posts.forEach((post, index) => {
+    if (!post.slug) {
+      fail([`config.blog.posts[${index}] is missing "slug".`]);
+    }
+    const prev = config.blog.posts[index - 1];
+    const next = config.blog.posts[index + 1];
+    const prevLink = prev
+      ? { href: `${prev.slug}.html`, label: `← ${prev.title}` }
+      : { href: './', label: '← All guides' };
+    const nextLink = next
+      ? { href: `${next.slug}.html`, label: `Next guide: ${next.title}` }
+      : { href: './', label: 'Browse all guides' };
+    const context = Object.assign({}, config, {
+      paths: { root: '../' },
+      post: Object.assign({}, post, { index, prevLink, nextLink }),
+    });
+    const out = replacePlaceholders(tmplExpanded, context, `blog/${post.slug}.html`);
+    fs.writeFileSync(path.join(outDir, `${post.slug}.html`), out);
+    count += 1;
+  });
+  return count;
+}
+
 function generateSitemap(config) {
-  if (!fs.existsSync(SITEMAP_TEMPLATE)) return;
-  const text = fs.readFileSync(SITEMAP_TEMPLATE, 'utf8');
-  fs.writeFileSync(
-    path.join(DIST_DIR, 'sitemap.xml'),
-    replacePlaceholders(text, config, 'sitemap-template.xml'),
-  );
+  const domain = `https://${config.brand.consumerDomain}`;
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [
+    { loc: `${domain}/`, freq: 'weekly', priority: '1.0' },
+    { loc: `${domain}/privacy.html`, freq: 'yearly', priority: '0.2' },
+    { loc: `${domain}/terms.html`, freq: 'yearly', priority: '0.2' },
+    { loc: `${domain}/blog/`, freq: 'weekly', priority: '0.7' },
+  ];
+  if (config.blog && Array.isArray(config.blog.posts)) {
+    for (const post of config.blog.posts) {
+      urls.push({
+        loc: `${domain}/blog/${post.slug}.html`,
+        freq: 'monthly',
+        priority: '0.6',
+        lastmod: post.date || today,
+      });
+    }
+  }
+  const body = urls.map((u) => {
+    const lastmod = u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : '';
+    return `  <url>\n    <loc>${u.loc}</loc>${lastmod}\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`;
+  }).join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), xml);
 }
 
 function copyRobots() {
@@ -292,9 +383,10 @@ function main() {
   validateConfig(config, args.configPath);
   emptyDir(DIST_DIR);
   const fileCount = walkSrc(config);
+  const postCount = generateBlogPosts(config);
   generateSitemap(config);
   copyRobots();
-  console.log(`[build] wrote ${fileCount} template file(s) to dist/ (config: ${path.relative(ROOT, args.configPath)})`);
+  console.log(`[build] wrote ${fileCount} page(s) + ${postCount} blog post(s) to dist/ (config: ${path.relative(ROOT, args.configPath)})`);
   printChecklist(config);
 }
 

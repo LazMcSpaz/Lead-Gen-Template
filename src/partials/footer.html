@@ -1,0 +1,37 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <p style="font-weight:var(--fw-bold); color:var(--color-text-inverse); font-size:var(--fs-md); margin-bottom:var(--space-2);">{{brand.consumerName}}</p>
+      <p>Local {{trade.name}} matching for {{market.city}} and surrounding areas.</p>
+      <p style="margin-top:var(--space-3);">A service of {{brand.entityName}}.</p>
+    </div>
+    <div>
+      <h4>Service</h4>
+      <ul>
+        <li><a href="{{paths.root}}#services">Services</a></li>
+        <li><a href="{{paths.root}}#how-it-works">How it works</a></li>
+        <li><a href="{{paths.root}}#contact">Get matched</a></li>
+        <li><a href="{{paths.root}}blog/">Guides</a></li>
+        <li><a href="{{paths.root}}#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Areas</h4>
+      <ul>
+        <li>{{market.city}}, {{market.stateAbbr}}</li>
+        <li>{{market.surroundingAreas}}</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:{{brand.phone}}">{{brand.phone}}</a></li>
+        <li><a href="mailto:{{brand.email}}">{{brand.email}}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <span>&copy; {{brand.entityName}}. All rights reserved.</span>
+    <span><a href="{{paths.root}}privacy.html">Privacy</a> · <a href="{{paths.root}}terms.html">Terms</a></span>
+  </div>
+</footer>

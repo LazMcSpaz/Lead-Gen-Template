@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- @include head-common.html -->
+  <title>Privacy Policy — {{brand.consumerName}}</title>
+  <meta name="description" content="How {{brand.consumerName}} collects, uses, and protects information from homeowners requesting a {{trade.name}} match.">
+  <link rel="canonical" href="https://{{brand.consumerDomain}}/privacy.html">
+  <meta name="robots" content="index,follow">
+</head>
+<body>
+
+<!-- @include header.html -->
+
+<main>
+<section class="section">
+  <div class="container container--narrow">
+    <a class="back-link" href="./">Back to home</a>
+    <header class="section-header">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="text-muted"><small>Effective {{legal.effectiveDate}}</small></p>
+    </header>
+    <div class="post__body">
+      <p>{{brand.consumerName}} ("we," "us") is operated by {{brand.entityName}}. This page explains what information we collect when you submit the lead form, how we use it, and the choices you have.</p>
+
+      <h2>What we collect</h2>
+      <p>When you submit the form on this site we collect the information you provide: your name, phone number, property address, email (if given), the service you need, your timeline, ownership status, whether you're comparing other quotes, and any free-text notes. We also collect basic technical information automatically — IP address, browser, and pages viewed — through Google Analytics.</p>
+
+      <h2>How we use it</h2>
+      <p>The information you submit is used for one purpose: to match you with a vetted local {{trade.name}} who serves {{market.city}} and the surrounding area. We share your details with at most three {{trade.namePlural}} per request. We never sell your information to data brokers, advertising networks, or unrelated third parties.</p>
+      <p>To improve match quality, we send your address to a third-party property data provider (such as ATTOM Data) and a non-personal summary of your form answers to an AI service (Anthropic's Claude API) which generates a one-paragraph briefing for the matched {{trade.name}}. These services do not retain your data for their own marketing.</p>
+
+      <h2>Cookies and tracking</h2>
+      <p>This site uses Google Analytics (cookie-based) to understand traffic. You can opt out with a browser-level Do Not Track setting or by using ad-blocking extensions. We do not run remarketing ads.</p>
+
+      <h2>Your choices</h2>
+      <p>You can request that we delete the information you submitted, or that we provide a copy of what we have on file, by emailing <a href="mailto:{{brand.email}}">{{brand.email}}</a>. We respond within seven business days.</p>
+
+      <h2>Children</h2>
+      <p>This site is intended for adults requesting service for property they own, manage, or rent. We don't knowingly collect information from anyone under 18.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about this policy: <a href="mailto:{{brand.email}}">{{brand.email}}</a><br>Postal: {{brand.entityName}}, {{brand.address}}</p>
+
+      <h2>Changes</h2>
+      <p>If we update this policy materially, we'll change the effective date at the top of this page and notify anyone with an active matched request via email.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- @include footer.html -->
+
+</body>
+</html>

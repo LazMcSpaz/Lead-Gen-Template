@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- @include head-common.html -->
+  <title>Terms of Service — {{brand.consumerName}}</title>
+  <meta name="description" content="Terms governing use of the {{brand.consumerName}} {{trade.name}} matching service for {{market.city}} homeowners.">
+  <link rel="canonical" href="https://{{brand.consumerDomain}}/terms.html">
+  <meta name="robots" content="index,follow">
+</head>
+<body>
+
+<!-- @include header.html -->
+
+<main>
+<section class="section">
+  <div class="container container--narrow">
+    <a class="back-link" href="./">Back to home</a>
+    <header class="section-header">
+      <span class="eyebrow">Legal</span>
+      <h1>Terms of Service</h1>
+      <p class="text-muted"><small>Effective {{legal.effectiveDate}}</small></p>
+    </header>
+    <div class="post__body">
+      <p>By using {{brand.consumerName}} ("the service"), operated by {{brand.entityName}}, you agree to these terms.</p>
+
+      <h2>What the service does</h2>
+      <p>{{brand.consumerName}} is a free homeowner-facing matching service. We accept service requests through the form on this site, score them for intent and timing, and route them to up to three vetted local {{trade.namePlural}} who pay us a per-lead fee. We are not a {{trade.name}}, do not perform the work, and are not a party to any agreement you reach with the matched {{trade.name}}.</p>
+
+      <h2>Your responsibilities</h2>
+      <p>Information you submit must be accurate and about a property you own, manage, or are otherwise authorized to request work on. Don't submit other people's information without their consent. Don't use the form to test, scrape, or abuse the service.</p>
+
+      <h2>The matched {{trade.name}}</h2>
+      <p>We screen the {{trade.namePlural}} we work with for licensing, insurance, and {{market.county}} track record. We do not guarantee the work they perform, the quotes they give, or any specific outcome. Any contract for service is between you and the {{trade.name}} directly.</p>
+
+      <h2>No warranty</h2>
+      <p>The service is provided "as is" without warranties of any kind, express or implied. We make no guarantees about response time, match quality, or availability of the site.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>To the fullest extent permitted by law, {{brand.entityName}} is not liable for any indirect, incidental, or consequential damages arising from your use of the service or any work performed by a matched {{trade.name}}. Our total liability for any direct damages will not exceed $100 USD or the amount you paid us (zero), whichever is greater.</p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of the State of {{market.state}}, without regard to conflict-of-laws principles. Any dispute will be resolved in the state or federal courts located in {{market.county}}, {{market.state}}.</p>
+
+      <h2>Contact</h2>
+      <p>Questions: <a href="mailto:{{brand.email}}">{{brand.email}}</a><br>Postal: {{brand.entityName}}, {{brand.address}}</p>
+
+      <h2>Changes</h2>
+      <p>We may update these terms; the effective date at the top reflects the latest version. Continued use after a change constitutes acceptance.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- @include footer.html -->
+
+</body>
+</html>

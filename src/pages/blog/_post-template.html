@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- @include head-common.html -->
+  <title>{{post.title}} — {{brand.consumerName}}</title>
+  <meta name="description" content="{{post.excerpt}}">
+  <link rel="canonical" href="https://{{brand.consumerDomain}}/blog/{{post.slug}}.html">
+  <meta property="og:title" content="{{post.title}}">
+  <meta property="og:description" content="{{post.excerpt}}">
+  <meta property="og:image" content="{{post.image}}">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="{{post.date}}">
+  <!-- @include schema-article.html -->
+</head>
+<body>
+
+<!-- @include header.html -->
+
+<main>
+<article class="section">
+  <div class="container container--narrow">
+    <a class="back-link" href="./">All guides</a>
+    <div class="post">
+      <figure class="post__hero">
+        <img src="{{post.image}}" alt="{{post.imageAlt}}">
+      </figure>
+      <div class="post__meta">
+        <span>{{post.date}}</span>
+        <span>{{post.readMinutes}} min read</span>
+        <span>{{trade.nameDisplay}} guide</span>
+      </div>
+      <h1 class="post__title">{{post.title}}</h1>
+      <p class="lead">{{post.excerpt}}</p>
+      <div class="post__body">
+        {{post.body}}
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="section section--surface">
+  <div class="container container--narrow text-center">
+    <h2>Ready to talk to a {{trade.name}}?</h2>
+    <p class="lead mx-auto" style="margin-inline:auto;">Free, no obligation. We'll match you with a vetted {{market.city}} pro in under an hour.</p>
+    <div style="margin-top: var(--space-5); display:flex; gap: var(--space-3); justify-content:center; flex-wrap:wrap;">
+      <a href="{{paths.root}}#contact" class="btn btn--primary btn--large">Get matched</a>
+      <a href="tel:{{brand.phone}}" class="btn btn--ghost btn--large">Call {{brand.phone}}</a>
+    </div>
+    <div style="margin-top: var(--space-7); display:flex; justify-content:space-between; gap: var(--space-4); flex-wrap:wrap;">
+      <a href="{{post.prevLink.href}}" class="post-card__readmore">{{post.prevLink.label}}</a>
+      <a href="{{post.nextLink.href}}" class="post-card__readmore">{{post.nextLink.label}}</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- @include footer.html -->
+
+</body>
+</html>
